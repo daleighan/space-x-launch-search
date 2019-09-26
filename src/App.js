@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {useApolloClient} from '@apollo/react-hooks';
+import {withApollo} from 'react-apollo';
 import LaunchList from './LaunchList';
 import {GET_LAUNCHES} from './query.js';
 
-function App() {
-  const client = useApolloClient();
-
+function App({client}) {
   const [formState, updateForm] = useState({
     missionName: '',
     launchYear: '',
@@ -45,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default withApollo(App);
