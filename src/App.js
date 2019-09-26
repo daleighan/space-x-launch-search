@@ -3,31 +3,32 @@ import {gql} from 'apollo-boost';
 import {useLazyQuery} from '@apollo/react-hooks';
 import LaunchList from './LaunchList';
 
-function createQuery({missionName, launchYear, rocketName}) {
-  return gql`
-    {
-      launchesPast(limit: 10, find: {mission_name: "${missionName}", rocket_name: "${rocketName}", launch_year: "${launchYear}"}) {
-        id
-        mission_name
-        launch_date_local
-        links {
-          video_link
-        }
-        rocket {
-          rocket_name
-        }
+const GET_LAUNCHES = gql`
+  query Launch($missionName: String!, $rocketName: String!, $launchYear: String!) {
+    launchesPast(find: {mission_name: $missionName, rocket_name: $rocketName, launch_year: $launchYear}) {
+      id
+      mission_name
+      launch_year
+      links {
+        video_link
       }
-      launchesUpcoming {
-        id
-        mission_name
-        launch_date_local
-        rocket {
-          rocket_name
-        }
+      rocket {
+        rocket_name
       }
     }
-  `;
-}
+    launchesUpcoming(find: {mission_name: $missionName, rocket_name: $rocketName, launch_year: $launchYear}) {
+      id
+      mission_name
+      launch_year
+      links {
+        video_link
+      }
+      rocket {
+        rocket_name
+      }
+    }
+  }
+`;
 
 function App() {
   const [formState, updateForm] = useState({
@@ -39,9 +40,9 @@ function App() {
   const setFormState = (field, value) =>
     updateForm({...formState, [field]: value});
 
-  const [fetchLaunches, {called, loading, data}] = useLazyQuery(
-    createQuery(formState),
-  );
+  const [fetchLaunches, {called, data}] = useLazyQuery(GET_LAUNCHES, {
+    variables: formState,
+  });
 
   return (
     <div className="App">
@@ -59,11 +60,7 @@ function App() {
         <div>Please Enter A Search</div>
       ) : (
         <div>
-          {loading ? (
-            <div>loading...</div>
-          ) : (
-            <LaunchList launchList={data.launchesPast} />
-          )}
+          {data && <LaunchList launchList={data.launchesPast} />}
         </div>
       )}
     </div>
