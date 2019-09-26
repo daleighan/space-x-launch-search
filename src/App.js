@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {gql} from 'apollo-boost';
-import {useQuery} from '@apollo/react-hooks';
+import {useLazyQuery} from '@apollo/react-hooks';
 import LaunchList from './LaunchList';
 
-function createQuery(missionName, launchYear, rocketName) {
+function createQuery({missionName, launchYear, rocketName}) {
   return gql`
     {
       launchesPast(limit: 10, find: {mission_name: "${missionName}", rocket_name: "${rocketName}", launch_year: "${launchYear}"}) {
         id
         mission_name
-        launch_year
+        launch_date_local
         links {
           video_link
         }
@@ -20,7 +20,7 @@ function createQuery(missionName, launchYear, rocketName) {
       launchesUpcoming {
         id
         mission_name
-        launch_year
+        launch_date_local
         rocket {
           rocket_name
         }
@@ -30,7 +30,6 @@ function createQuery(missionName, launchYear, rocketName) {
 }
 
 function App() {
-  const {loading, error, data} = useQuery(createQuery('', '', ''));
   const [formState, updateForm] = useState({
     missionName: '',
     launchYear: '',
@@ -40,9 +39,10 @@ function App() {
   const setFormState = (field, value) =>
     updateForm({...formState, [field]: value});
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  console.log('form state', formState);
+  const [fetchLaunches, {called, loading, data}] = useLazyQuery(
+    createQuery(formState),
+  );
+
   return (
     <div className="App">
       {Object.keys(formState).map((field, idx) => (
@@ -51,9 +51,21 @@ function App() {
           type="text"
           value={formState[field]}
           onChange={e => setFormState(field, e.target.value)}
+          placeholder={field}
         />
       ))}
-      <LaunchList launchList={data.launchesPast} />
+      <button onClick={() => fetchLaunches(formState)}>Search</button>
+      {!called ? (
+        <div>Please Enter A Search</div>
+      ) : (
+        <div>
+          {loading ? (
+            <div>loading...</div>
+          ) : (
+            <LaunchList launchList={data.launchesPast} />
+          )}
+        </div>
+      )}
     </div>
   );
 }

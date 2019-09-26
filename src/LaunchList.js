@@ -1,6 +1,7 @@
 import React from 'react';
 
 function LaunchList({launchList}) {
+  console.log(launchList);
   return (
     <div>
       {launchList.map((launch, idx) => (
