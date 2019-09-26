@@ -3,7 +3,6 @@ import moment from 'moment';
 import './LaunchList.css';
 
 function LaunchList({launchList}) {
-  console.log(launchList);
   return (
     <div className="launch-list mt-2">
       {launchList.length ? (
@@ -26,7 +25,11 @@ function LaunchList({launchList}) {
             <div className="flex-between">
               <div className="left">Video Link</div>
               <div className="right">
-                <a href={launch.links.video_link}>here</a>
+                {launch.links.video_link ? (
+                  <a href={launch.links.video_link}>here</a>
+                ) : (
+                  <div>Not Yet Available</div>
+                )}
               </div>
             </div>
           </div>
