@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {gql} from 'apollo-boost';
+import {useQuery} from '@apollo/react-hooks';
+
+const GET_LAUNCHES = gql`
+  {
+    launchesPast(limit: 10) {
+      mission_name
+      launch_year
+      links {
+        video_link
+      }
+      rocket {
+        rocket_name
+      }
+    }
+  }
+`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const {loading, error, data} = useQuery(GET_LAUNCHES);
+  console.log(loading, error, data);
+  return <div className="App">Hello</div>;
 }
 
 export default App;
