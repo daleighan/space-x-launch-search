@@ -1,0 +1,9 @@
+.launch-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.launch-list-item {
+  width: 30%;
+};

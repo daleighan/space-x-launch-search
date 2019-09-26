@@ -36,7 +36,7 @@ function Container({client}) {
         {launches ? (
           <LaunchList launchList={launches} />
         ) : (
-          <div>Please Enter Your Search</div>
+          <div className="flex-center">Please Enter Your Search</div>
         )}
       </div>
     </div>
