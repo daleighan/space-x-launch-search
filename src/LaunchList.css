@@ -13,6 +13,6 @@
     flex-direction: column;
   }
   .launch-list-item {
-    width: 80%;
+    width: 100%;
   }
 }
