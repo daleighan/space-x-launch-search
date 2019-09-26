@@ -1,34 +1,7 @@
 import React, {useState} from 'react';
-import {gql} from 'apollo-boost';
 import {useLazyQuery} from '@apollo/react-hooks';
 import LaunchList from './LaunchList';
-
-const GET_LAUNCHES = gql`
-  query Launch($missionName: String!, $rocketName: String!, $launchYear: String!) {
-    launchesPast(find: {mission_name: $missionName, rocket_name: $rocketName, launch_year: $launchYear}) {
-      id
-      mission_name
-      launch_year
-      links {
-        video_link
-      }
-      rocket {
-        rocket_name
-      }
-    }
-    launchesUpcoming(find: {mission_name: $missionName, rocket_name: $rocketName, launch_year: $launchYear}) {
-      id
-      mission_name
-      launch_year
-      links {
-        video_link
-      }
-      rocket {
-        rocket_name
-      }
-    }
-  }
-`;
+import {GET_LAUNCHES} from './query.js';
 
 function App() {
   const [formState, updateForm] = useState({
@@ -40,7 +13,7 @@ function App() {
   const setFormState = (field, value) =>
     updateForm({...formState, [field]: value});
 
-  const [fetchLaunches, {called, data}] = useLazyQuery(GET_LAUNCHES, {
+  const [fetchLaunches, {called, loading, data}] = useLazyQuery(GET_LAUNCHES, {
     variables: formState,
   });
 
@@ -60,7 +33,13 @@ function App() {
         <div>Please Enter A Search</div>
       ) : (
         <div>
-          {data && <LaunchList launchList={data.launchesPast} />}
+          {loading ? (
+            <div>loading...</div>
+          ) : (
+            <LaunchList
+              launchList={[...data.launchesPast, ...data.launchesUpcoming]}
+            />
+          )}
         </div>
       )}
     </div>
