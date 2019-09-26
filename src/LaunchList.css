@@ -6,4 +6,13 @@
 
 .launch-list-item {
   width: 30%;
-};
+}
+
+@media(max-width: 768px) {
+  .launch-list {
+    flex-direction: column;
+  }
+  .launch-list-item {
+    width: 80%;
+  }
+}
