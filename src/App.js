@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
-import {withApollo} from 'react-apollo';
+import {ApolloProvider} from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import LaunchList from './LaunchList';
-import {GET_LAUNCHES} from './query.js';
+import SearchArea from './SearchArea';
+
+const apolloClient = new ApolloClient({
+  uri: 'https://api.spacex.land/graphql',
+});
+
 
 function App({client}) {
   const [formState, updateForm] = useState({
@@ -16,31 +22,19 @@ function App({client}) {
     updateForm({...formState, [field]: value});
 
   return (
-    <div className="App">
-      <div>
-        {Object.keys(formState).map((field, idx) => (
-          <input
-            key={idx}
-            type="text"
-            value={formState[field]}
-            onChange={e => setFormState(field, e.target.value)}
-            placeholder={field}
-          />
-        ))}
-        <button
-          onClick={async () => {
-            const {data} = await client.query({
-              query: GET_LAUNCHES,
-              variables: formState,
-            });
-            updateLaunches([...data.launchesPast, ...data.launchesUpcoming]);
-          }}>
-          Search
-        </button>
-      </div>
-      {launches ? <LaunchList launchList={launches} /> : <div>Please Enter Your Search</div>}
-    </div>
+    <ApolloProvider client={apolloClient}>
+      <SearchArea
+        formState={formState}
+        setFormState={setFormState}
+        updateLaunches={updateLaunches}
+      />
+      {launches ? (
+        <LaunchList launchList={launches} />
+      ) : (
+        <div>Please Enter Your Search</div>
+      )}
+  </ApolloProvider>
   );
 }
 
-export default withApollo(App);
+export default App;
