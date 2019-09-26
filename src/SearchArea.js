@@ -2,7 +2,7 @@ import React from 'react';
 
 function SearchArea({client, formState, setFormState, fetchLaunches}) {
   return (
-    <div>
+    <div className="flex-center">
       {Object.keys(formState).map((field, idx) => (
         <input
           key={idx}
@@ -12,10 +12,7 @@ function SearchArea({client, formState, setFormState, fetchLaunches}) {
           placeholder={field}
         />
       ))}
-      <button
-        onClick={async () => await fetchLaunches()}>
-        Search
-      </button>
+      <button onClick={() => fetchLaunches()}>Search</button>
     </div>
   );
 }

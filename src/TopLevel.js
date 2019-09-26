@@ -3,6 +3,7 @@ import LaunchList from './LaunchList';
 import SearchArea from './SearchArea';
 import {withApollo} from 'react-apollo';
 import {GET_LAUNCHES} from './query.js';
+import './TopLevel.css';
 
 function Container({client}) {
   const [formState, updateForm] = useState({
@@ -16,7 +17,7 @@ function Container({client}) {
   const setFormState = (field, value) =>
     updateForm({...formState, [field]: value});
 
-  const fetchLaunches = async function() {
+  const fetchLaunches = async () => {
     const {data} = await client.query({
       query: GET_LAUNCHES,
       variables: formState,
@@ -25,17 +26,19 @@ function Container({client}) {
   };
 
   return (
-    <div>
-      <SearchArea
-        formState={formState}
-        setFormState={setFormState}
-        fetchLaunches={fetchLaunches}
-      />
-      {launches ? (
-        <LaunchList launchList={launches} />
-      ) : (
-        <div>Please Enter Your Search</div>
-      )}
+    <div className="flex-center">
+      <div className="container">
+        <SearchArea
+          formState={formState}
+          setFormState={setFormState}
+          fetchLaunches={fetchLaunches}
+        />
+        {launches ? (
+          <LaunchList launchList={launches} />
+        ) : (
+          <div>Please Enter Your Search</div>
+        )}
+      </div>
     </div>
   );
 }
