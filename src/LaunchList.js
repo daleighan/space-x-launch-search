@@ -1,10 +1,9 @@
 import React from 'react';
 
 function LaunchList({launchList}) {
-  console.log(launchList);
   return (
     <div>
-      {launchList.map((launch, idx) => (
+      {launchList.length ? launchList.map((launch, idx) => (
         <div key={idx}>
           <div>{launch.id}: {launch.mission_name}</div>
           <div>{launch.launch_date_local}</div>
@@ -12,7 +11,7 @@ function LaunchList({launchList}) {
           <div>{launch.links.video_link}</div>
           <div>{launch.rocket.rocket_name}</div>
         </div>
-      ))}
+      )) : <div>No Launches Matched Your Search</div>}
     </div>
   );
 }

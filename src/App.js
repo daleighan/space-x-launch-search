@@ -10,12 +10,13 @@ function App() {
     rocketName: '',
   });
 
-  const setFormState = (field, value) =>
-    updateForm({...formState, [field]: value});
-
   const [fetchLaunches, {called, loading, data}] = useLazyQuery(GET_LAUNCHES, {
     variables: formState,
   });
+
+  const setFormState = (field, value) =>
+    updateForm({...formState, [field]: value});
+
 
   return (
     <div className="App">
