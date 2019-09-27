@@ -1,6 +1,9 @@
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f8f8f8;
+}
+
+.title {
+  color: #5a5c69;
 }
 
 .rocket-ship {
@@ -15,6 +18,7 @@ body {
 }
 
 .flex-between {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }

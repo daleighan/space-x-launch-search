@@ -29,7 +29,7 @@ function Container({client}) {
   return (
     <div className="flex-center">
       <div className="container">
-        <h1><img className="rocket-ship" src={rocket} alt={''}/> SpaceX Launch Search</h1>
+        <h1 class="title"><img className="rocket-ship" src={rocket} alt={''}/> SpaceX Launch Search</h1>
         <SearchArea
           formState={formState}
           setFormState={setFormState}

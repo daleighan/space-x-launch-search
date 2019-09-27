@@ -3,7 +3,7 @@ import './SearchArea.css';
 
 function SearchArea({client, formState, setFormState, fetchLaunches}) {
   return (
-    <div className="flex-center search-area">
+    <div className="flex-between" id="search-area">
       {Object.keys(formState).map((field, idx) => (
         <input
           key={idx}
@@ -13,7 +13,9 @@ function SearchArea({client, formState, setFormState, fetchLaunches}) {
           placeholder={field}
         />
       ))}
-      <button onClick={() => fetchLaunches()}>Search</button>
+      <div className="button-center">
+        <button onClick={() => fetchLaunches()}>Search</button>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,38 @@
-.search-area input {
-  font-size: 1rem;
+#search-area input {
+  font-size: 1.2rem;
   padding: 0.3rem 1rem;
   margin: 0 0.5rem;
   text-align: center;
-  width: 24%;
+  width: 28%;
+}
+
+#search-area button {
+  padding: 0;
   border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #5a5c69;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border: 1px solid #5a5c69;
+}
+
+#search-area button:hover {
+  background-color: black;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  #search-area {
+    display: block;
+  }
+  #search-area input {
+    width: 100%;
+    margin: 0.3rem 0;
+  }
+  .button-center {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
 }
