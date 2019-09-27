@@ -15,7 +15,7 @@ function LaunchList({launchList}) {
             <div className="flex-between">
               <div className="left">Launch Date</div>
               <div className="right">
-                {moment(launch.launch_date_local).format('MM/DD/YYYY')}
+                {moment(launch.launch_date_local).format('M/D/YYYY')}
               </div>
             </div>
             <div className="flex-between">
@@ -26,7 +26,7 @@ function LaunchList({launchList}) {
               <div className="left">Video Link</div>
               <div className="right">
                 {launch.links.video_link ? (
-                  <a href={launch.links.video_link}>here</a>
+                  <a href={launch.links.video_link} target="_blank">here</a>
                 ) : (
                   <div>Not Yet Available</div>
                 )}

@@ -10,7 +10,9 @@ function SearchArea({client, formState, setFormState, fetchLaunches}) {
           type="text"
           value={formState[field]}
           onChange={e => setFormState(field, e.target.value)}
-          placeholder={field}
+          placeholder={
+            field[0].toUpperCase() + field.replace(/([A-Z])/g, ' $1').slice(1)
+          }
         />
       ))}
       <div className="button-center">
