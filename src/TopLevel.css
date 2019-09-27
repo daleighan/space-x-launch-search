@@ -1,11 +1,17 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f8f8;
+}
+
+.rocket-ship {
+  width: 34px;
+  height: 34px;
+}
+
 .flex-center {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.flex-center input {
-  max-width: 30%;
 }
 
 .flex-between {
@@ -17,6 +23,12 @@
   width: 80%;
 }
 
-.mt-2 {
+.mt {
   margin-top: 2rem;
+}
+
+@media(max-width: 768px) {
+  .mt {
+    margin-top: 1rem;
+  }
 }

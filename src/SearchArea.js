@@ -1,8 +1,9 @@
 import React from 'react';
+import './SearchArea.css';
 
 function SearchArea({client, formState, setFormState, fetchLaunches}) {
   return (
-    <div className="flex-center">
+    <div className="flex-center search-area">
       {Object.keys(formState).map((field, idx) => (
         <input
           key={idx}

@@ -4,6 +4,7 @@ import SearchArea from './SearchArea';
 import {withApollo} from 'react-apollo';
 import {GET_LAUNCHES} from './query.js';
 import './TopLevel.css';
+import rocket from './rocket.svg';
 
 function Container({client}) {
   const [formState, updateForm] = useState({
@@ -28,6 +29,7 @@ function Container({client}) {
   return (
     <div className="flex-center">
       <div className="container">
+        <h1><img className="rocket-ship" src={rocket} alt={''}/> SpaceX Launch Search</h1>
         <SearchArea
           formState={formState}
           setFormState={setFormState}
@@ -36,7 +38,7 @@ function Container({client}) {
         {launches ? (
           <LaunchList launchList={launches} />
         ) : (
-          <div className="flex-center mt-2">Please Enter Your Search</div>
+          <div className="flex-center mt">Please Enter Your Search</div>
         )}
       </div>
     </div>

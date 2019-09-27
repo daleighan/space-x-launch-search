@@ -4,10 +4,10 @@ import './LaunchList.css';
 
 function LaunchList({launchList}) {
   return (
-    <div className="launch-list mt-2">
+    <div className="launch-list mt">
       {launchList.length ? (
         launchList.map((launch, idx) => (
-          <div key={idx} className="launch-list-item mt-2">
+          <div key={idx} className="launch-list-item mt">
             <div className="flex-between">
               <div className="left">Mission Name</div>
               <div className="right">{launch.mission_name}</div>
