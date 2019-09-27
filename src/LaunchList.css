@@ -5,9 +5,12 @@
 }
 
 .launch-list-item {
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.7rem;
   width: 45%;
   box-shadow: 10px 10px 5px -10px rgba(0,0,0,0.75);
+  border-color: grey;
+  border-style: solid;
+  border-width: 0.5px;
 }
 
 .launch-list-item a {

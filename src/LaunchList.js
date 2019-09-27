@@ -26,7 +26,7 @@ function LaunchList({launchList}) {
               <div className="left">Video Link</div>
               <div className="right">
                 {launch.links.video_link ? (
-                  <a href={launch.links.video_link} target="_blank">here</a>
+                  <a href={launch.links.video_link}>here</a>
                 ) : (
                   <div>Not Yet Available</div>
                 )}

@@ -29,7 +29,7 @@ function Container({client}) {
   return (
     <div className="flex-center">
       <div className="container">
-        <h1 class="title">
+        <h1 className="title">
           <img className="rocket-ship" src={rocket} alt={''} /> SpaceX Launch
           Search
         </h1>
